@@ -1,0 +1,202 @@
+import Vit 1.0
+import GUI 1.0
+
+Window {
+    title: "Vitrum Calculator"
+    width: 500
+    height: 500
+    minWidth: 300
+    minHeight: 400
+
+    // Dieses Rechteck füllt den Hintergrund
+    Rectangle {
+        id: container
+        anchors.fill: parent
+        color: Vit.rgb(71, 71, 71)
+
+        // Das Display mit den Zahlen
+        Rectangle {
+            id: display
+            anchors.margins: 10
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.right: parent.right
+            height: 100
+            color: Vit.rgb(44, 197, 187)
+            radius: 10
+
+            // Die oberste Zeile, welche die history enthält
+            Text {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.topMargin: 17
+                anchors.margins: 20
+                text: history
+                color: "black"
+                font.pointSize: 40
+                font.family: "Arial"
+                font.weight: Text.Bold
+                horizontalAlignment: Text.AlignRight
+                elide: Text.ElideLeft
+            }
+
+            // Die aktuelle Zahl oder das Ergebnis
+            Text {
+                anchors.fill: parent
+                anchors.margins: 20
+                text: value
+                color: "black"
+                font.pointSize: 100
+                font.family: "Arial"
+                font.weight: Text.Medium
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignRight
+                elide: Text.ElideLeft
+            }
+
+            // Die untere Zeile, welche die aktuelle Zahl in binärer und hexadezimaler Notation anzeigt
+            Text {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 30
+                anchors.margins: 20
+                text: hexValue + " | " + binaryValue
+                color: "black"
+                font.pointSize: 40
+                font.family: "Arial"
+                font.weight: Text.Bold
+                horizontalAlignment: Text.AlignRight
+                elide: Text.ElideLeft
+            }
+        }
+
+        // Ein Container für das Tastenfeld
+        Item {
+            id: buttons
+            anchors.top: display.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: 10
+
+            // Dieses Raster wird die Knöpfe positionieren
+            Grid {
+                id: buttonGrid
+                anchors.fill: parent
+                spacing: 10
+                rows: 5
+                columns: 4
+
+                // Weil noch kein GridLayout implementiert ist, muss die Größe der Knöpfe durch Expressions ausgerechnet werden
+                property float sizeReduction: spacing - (spacing / columns)
+                property float btnWidth: ((right - left) / columns) - sizeReduction
+                property float btnHeight: ((bottom - top) / rows) - sizeReduction
+
+                CalcBtn {
+                    text: "AC"
+                    handler: clearAll
+                }
+
+                CalcBtn {
+                    text: "C"
+                    handler: clear
+                }
+
+                CalcBtn {
+                    text: "<"
+                    handler: backspace
+                }
+
+                CalcBtn {
+                    text: "/"
+                    handler: operation
+                }
+
+                CalcBtn {
+                    text: "7"
+                    handler: function(){appendDigit(7)}
+                }
+
+                CalcBtn {
+                    text: "8"
+                    handler: function(){appendDigit(8)}
+                }
+
+                CalcBtn {
+                    text: "9"
+                    handler: function(){appendDigit(9)}
+                }
+
+                CalcBtn {
+                    text: "*"
+                    handler: operation
+                }
+
+                CalcBtn {
+                    text: "4"
+                    handler: function(){appendDigit(4)}
+                }
+
+                CalcBtn {
+                    text: "5"
+                    handler: function(){appendDigit(5)}
+                }
+
+                CalcBtn {
+                    text: "6"
+                    handler: function(){appendDigit(6)}
+                }
+
+                CalcBtn {
+                    text: "-"
+                    handler: operation
+                }
+
+                CalcBtn {
+                    text: "1"
+                    handler: function(){appendDigit(1)}
+                }
+
+                CalcBtn {
+                    text: "2"
+                    handler: function(){appendDigit(2)}
+                }
+
+                CalcBtn {
+                    text: "3"
+                    handler: function(){appendDigit(3)}
+                }
+
+                CalcBtn {
+                    text: "+"
+                    handler: operation
+                }
+
+                CalcBtn {
+                    text: "0"
+                    handler: function(){appendDigit(0)}
+                }
+
+                CalcBtn {
+                    text: "."
+                    handler: appendPeriod
+                }
+
+                CalcBtn {
+                    text: "+/-"
+                    handler: toggleSign
+                }
+
+                CalcBtn {
+                    text: "="
+                    handler: solve
+                }
+            }
+        }
+    }
+}
+
+
+

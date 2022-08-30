@@ -1,0 +1,26 @@
+import Controls 1.0
+
+// Die Datei definiert die Komponente "CalcBtn".
+// Sie macht die Nutzung des Buttons im Taschenrechner einfacher,
+// da sie einige Funktionen übernimmt, welche anschließend nicht mehr in der Hauptdatei definiert werden müssen.
+
+Button {
+    width: parent.btnWidth
+    height: parent.btnHeight
+    fontPointSize: 80
+    // Eine Funktion, die aufgerufen wird, wenn der Knopf gedrückt wird. Als Parameter wird der Text des Knopfes übergeben.
+    property var handler: function(){}
+
+    method clickHandler: {
+        // Hier wird der handler mit dem Text des Knopfes aufgerufen
+        handler(text)
+    }
+
+    Root.onCompleted: {
+        // Registrierung des Event-Listeners für das "onClicked" event
+        onClicked.AddEventListener(clickHandler)
+    }
+}
+
+
+
