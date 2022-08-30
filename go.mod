@@ -2,11 +2,9 @@ module calculator
 
 go 1.18
 
-replace github.com/omniskop/vitrum => ../vitrum
-
 require (
 	github.com/ericlagergren/decimal v0.0.0-20211103172832-aca2edc11f73
-	github.com/omniskop/vitrum v0.0.0-20220828022820-834b672d42dd
+	github.com/omniskop/vitrum v0.0.0-20220830212552-eb5692c306b3
 )
 
 require (
