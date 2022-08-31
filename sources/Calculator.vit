@@ -96,6 +96,7 @@ Window {
 
                 CalcBtn {
                     text: "AC"
+                    // hier wird eine Methode, die global definiert ist, direkt übergeben
                     handler: clearAll
                 }
 
@@ -116,6 +117,7 @@ Window {
 
                 CalcBtn {
                     text: "7"
+                    // um den Parameter zu überschreiben wird hier eine anonyme Funktion verwendet
                     handler: function(){appendDigit(7)}
                 }
 
